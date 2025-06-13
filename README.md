@@ -35,17 +35,17 @@ The objective of this project is to replicate a real-world adversarial attack ch
 ```plaintext
 shadowpath/
 ├── payloads/                 # Contains binary payloads and droppers
-│   ├── shadow_payload.bin    # Raw Meterpreter shellcode
-│   ├── ShadowDropper.xml     # MSBuild C# dropper
-│   ├── ShadowVeil.hta        # HTA file with PowerShell reverse shell
-│   └── ShadowVeil.bat        # Optional: Veil-generated .bat loader
+│   ├── shadow_payload.bin    # Raw Meterpreter shellcode (excluded from repo)
+│   ├── ShadowDropper.xml     # MSBuild C# dropper (sanitized)
+│   ├── ShadowVeil.hta        # HTA file with PowerShell reverse shell (placeholder IP)
+│   └── ShadowVeil.bat        # Optional: Veil-generated .bat loader (redacted)
 ├── scripts/
-│   └── generate_shadow_payload.sh   # Script for automated payload building
-├── logs/                   # Execution logs and troubleshooting notes
+│   └── generate_shadow_payload.sh   # Script for automated payload building (no hardcoded IPs)
+├── logs/                    # Execution logs and troubleshooting notes (scrubbed)
 │   └── setup_logs.md
-├── screenshots/            # Optional screenshots (e.g., Metasploit session)
-├── README.md               # Project documentation
-└── LICENSE                 # MIT License
+├── screenshots/             # Optional screenshots (e.g., Metasploit session)
+├── README.md                # Project documentation
+└── LICENSE                  # MIT License
 ```
 
 ---
